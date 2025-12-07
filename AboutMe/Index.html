@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Ba Yazed - Programmer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #ffd700;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .brand-yellow {
+            color: #ffd700;
+        }
+
+        .brand-white {
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffd700;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background: radial-gradient(circle at 20% 30%, #ffd700 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, #ffd700 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.15; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .hero-name {
+            color: #fff;
+        }
+
+        .hero-name-highlight {
+            color: #ffd700;
+        }
+
+        .hero-subtitle {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.125rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffed4e;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ffd700;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Sections */
+        .section-about, .section-skills, .section-contact {
+            padding: 100px 20px;
+        }
+
+        .section-experience, .section-projects {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .text-yellow {
+            color: #ffd700;
+        }
+
+        /* About Section */
+        .about-card {
+            background-color: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            border: 2px solid #ffd700;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .about-text {
+            font-size: 1.125rem;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .education-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .experience-card {
+            background-color: #000;
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 4px solid #ffd700;
+            transition: transform 0.3s;
+        }
+
+        .experience-card:hover {
+            transform: scale(1.05);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #ffd700;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: #ccc;
+        }
+
+        .card-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-list li {
+            color: #ccc;
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card-list li::before {
+            content: "▸";
+            color: #ffd700;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .skills-card {
+            background-color: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            border: 2px solid #ffd700;
+        }
+
+        .skills-title {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-tag-primary {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        .skill-tag-primary:hover {
+            background-color: #ffed4e;
+        }
+
+        .skill-tag-secondary {
+            background-color: #000;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+
+        .skill-tag-secondary:hover {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid #ffd700;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #ffed4e;
+            transform: scale(1.05);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-icon {
+            color: #ffd700;
+        }
+
+        .project-link {
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: #ffed4e;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .project-card:hover .project-title {
+            color: #ffd700;
+        }
+
+        .project-description {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: #ffd700;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            background-color: #000;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-left: 4px solid #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-icon {
+            background-color: #ffd700;
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            height: 60px;
+        }
+
+        .contact-label {
+            color: #999;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .contact-form-container {
+            background-color: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            border: 2px solid #ffd700;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #ffd700;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            background-color: #000;
+            border: 2px solid #333;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .form-control::placeholder {
+            color: #666;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #ffd700;
+            color: #000;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #ffed4e;
+            transform: scale(1.05);
+        }
+
+        .success-message {
+            background-color: #ffd700;
+            color: #000;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #000;
+            border-top: 2px solid #ffd700;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000;
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid #ffd700;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.75rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .experience-grid,
+            .skills-grid,
+            .projects-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .education-cards {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="brand-yellow">MB</span><span class="brand-white">YAZED</span>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="nav-links" id="navLinks">
+                <a href="#about" onclick="closeMobileMenu()">About</a>
+                <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+                <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+                <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+                <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                <span class="hero-name">MOHAMMED</span><br>
+                <span class="hero-name-highlight">BA YAZED</span>
+            </h1>
+            <div class="hero-subtitle">&lt; PROGRAMMER /&gt;</div>
+            <p class="hero-description">
+                Enthusiastic Computer Science student passionate about web and application development.
+                Currently pursuing a Bachelor's degree with a focus on creating innovative digital solutions.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="Mohammed_BaYazed_CV.pdf" download class="btn btn-secondary">
+                    ⬇ Download CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-about">
+        <div class="container">
+            <h2 class="section-title"><span class="text-yellow">About</span> Me</h2>
+            <div class="about-card">
+                <p class="about-text">
+                    I am an enthusiastic and dedicated student seeking internship opportunities to gain hands-on
+                    experience and contribute to a professional environment. Recognized for strong teamwork,
+                    communication, and time management skills developed through volunteer and community service work.
+                </p>
+                <p class="about-text">
+                    Adept at using computers for organization and problem-solving, with a positive attitude and
+                    a commitment to learning. Fluent in Arabic and skilled at building strong relationships with
+                    diverse individuals. Eager to apply academic knowledge and practical skills to support team
+                    goals and grow professionally.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section-experience">
+        <div class="container">
+            <h2 class="section-title"><span class="text-yellow">Experience</span> & Education</h2>
+            <div class="experience-grid">
+                <!-- Work Experience -->
+                <div class="experience-card">
+                    <div class="badge">APR - MAY 2018</div>
+                    <h3 class="card-title">Volunteer</h3>
+                    <p class="card-subtitle">Family Business • Jeddah, Saudi Arabia</p>
+                    <ul class="card-list">
+                        <li>Assisted in organizing and supporting community events and family programs</li>
+                        <li>Maintained clean, functional, and welcoming facilities to meet event needs</li>
+                        <li>Collaborated with team members to ensure smooth operations and visitor satisfaction</li>
+                        <li>Communicated effectively with staff to stay informed about upcoming activities</li>
+                        <li>Strengthened interpersonal and problem-solving skills in a dynamic environment</li>
+                    </ul>
+                </div>
+
+                <!-- Education -->
+                <div class="education-cards">
+                    <div class="experience-card">
+                        <div class="badge">2023 - APR 2027</div>
+                        <h3 class="card-title">Bachelor of Computer Science</h3>
+                        <p class="card-subtitle">Application Development</p>
+                        <p class="card-text">Varsity College</p>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="badge">2022 - 2023</div>
+                        <h3 class="card-title">Higher Certificate</h3>
+                        <p class="card-subtitle">Mobile Application & Web Development</p>
+                        <p class="card-text">Varsity College</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-skills">
+        <div class="container">
+            <h2 class="section-title"><span class="text-yellow">Skills</span> & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skills-card">
+                    <h3 class="skills-title">⚡ Technical Skills</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag skill-tag-primary">Computer Literacy</span>
+                        <span class="skill-tag skill-tag-primary">Web Development</span>
+                        <span class="skill-tag skill-tag-primary">Application Development</span>
+                        <span class="skill-tag skill-tag-primary">Time Management</span>
+                        <span class="skill-tag skill-tag-primary">C#</span>
+                        <span class="skill-tag skill-tag-primary">.NET</span>
+                        <span class="skill-tag skill-tag-primary">MVC</span>
+                        <span class="skill-tag skill-tag-primary">Cloud Computing</span>
+                    </div>
+                </div>
+
+                <div class="skills-card">
+                    <h3 class="skills-title">🎯 Soft Skills</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag skill-tag-secondary">Teamwork & Collaboration</span>
+                        <span class="skill-tag skill-tag-secondary">Positive Attitude</span>
+                        <span class="skill-tag skill-tag-secondary">Relationship Building</span>
+                        <span class="skill-tag skill-tag-secondary">Community Service</span>
+                        <span class="skill-tag skill-tag-secondary">Arabic Fluency</span>
+                        <span class="skill-tag skill-tag-secondary">Problem Solving</span>
+                        <span class="skill-tag skill-tag-secondary">Communication</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-projects">
+        <div class="container">
+            <h2 class="section-title"><span class="text-yellow">Featured</span> Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <svg class="project-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        <a href="https://github.com/VCCT-CLDV6212-2025-G2/CLDV_Part2_ST10174227" target="_blank" class="project-link">↗</a>
+                    </div>
+                    <h3 class="project-title">Cloud Application (Part 2)</h3>
+                    <p class="project-description">
+                        Advanced cloud-based application development project showcasing distributed systems and cloud architecture patterns.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Cloud</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">.NET</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <svg class="project-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        <a href="https://github.com/VCCT-CLDV6212-2025-G2/CLDV_Part1" target="_blank" class="project-link">↗</a>
+                    </div>
+                    <h3 class="project-title">Cloud Application (Part 1)</h3>
+                    <p class="project-description">
+                        Foundation cloud application project demonstrating core cloud computing principles and best practices.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Cloud</span>
+                        <span class="tag">Development</span>
+                        <span class="tag">.NET</span>
+                        <span class="tag">Azure</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-contact">
+        <div class="container">
+            <h2 class="section-title"><span class="text-yellow">Get In</span> Touch</h2>
+
+            <div class="success-message" id="successMessage">
+                Thank you! Your message has been sent successfully.
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <p class="contact-label">Phone</p>
+                            <p class="contact-value">+27 74 799 0677</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <p class="contact-label">Email</p>
+                            <p class="contact-value">Mohazed310@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <p class="contact-label">Location</p>
+                            <p class="contact-value">53 Main Rd, Claremont<br>Cape Town, South Africa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <div class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+                        </div>
+
+                        <button type="button" onclick="handleSubmit()" class="btn btn-submit">Send Message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Mohammed Ba Yazed. Built with <span class="text-yellow">passion</span> and <span class="text-yellow">code</span>.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact form submission
+        function handleSubmit() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Clear form
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+                
+                // Hide message after 3 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
